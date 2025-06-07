@@ -10,35 +10,40 @@ import {
 } from "react-router-dom";
 function Home() {
   //let users = [];
-  const [users, setUsers] = useState([]);
-  const inputName = useRef();
-  const inputAge = useRef();
-  const inputEmail = useRef();
-  //comando para buscar os usuários
-  async function getUsers() {
-    const usersFromApi = await api.get("/usuario");
-    setUsers(usersFromApi.data);
-    //console.log(users);
+  const [cars, setCars] = useState([]);
+  const inputMatricula = useRef();
+  const inputMarca = useRef();
+  const inputModelo = useRef();
+  const inputCor = useRef();
+  const inputCilindrada = useRef();
+ 
+  //comando para buscar os carros
+  async function getCars() {
+    const carsFromApi = await api.get("/carro");
+    setCars(carsFromApi.data);
+    //console.log(cars);
   }
-  //comando para criar um usuário
-  async function createUsers() {
-    await api.post("/usuario", {
-      email: inputEmail.current.value,
-      name: inputName.current.value,
-      age: parseInt(inputAge.current.value, 10),
+  //comando para cadastrar carro
+  async function createCars() {
+    await api.post("/carro", {
+      matricula: inputMatricula.current.value,
+      marca: inputMarca.current.value,
+      modelo: inputModelo.current.value,
+      cor: inputCor.current.value,
+      cilindrada: parseInt(inputCilindrada.current.value, 10),
     });
 
-    getUsers();
+    getCars();
   }
 
-  //comando para deletar um usuário
-  async function deleteUser(id) {
-    await api.delete(`/usuario/${id}`);
-    getUsers();
+  //comando para deletar um carro
+  async function deleteCar(id) {
+    await api.delete(`/carro/${id}`);
+    getCars();
   }
 
   useEffect(() => {
-    getUsers();
+    getCars();
   }, []);
 
   /*const users = [
@@ -65,53 +70,70 @@ function Home() {
   return (
     <div className="container">
       <form>
-        <h1>Cadastro de Usuário</h1>
+        <h1>Cadastro de Carros</h1>
         <input
           type="text"
-          placeholder="Digite o seu nome"
-          name="name"
-          ref={inputName}
+          placeholder="Digite a matricula do carro"
+          name="matricula"
+          ref={inputMatricula}
         />
         <br />
+        <input
+          type="text"
+          placeholder="Digite a marca do carro"
+          name="marca"
+          ref={inputMarca}
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="Digite o modelo do seu carro"
+          name="modelo"
+          ref={inputModelo}
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="Digite a cor do seu carro"
+          name="cor"
+          ref={inputCor}
+        />
+        <br/>
         <input
           type="number"
-          placeholder="Digite a sua idade"
-          name="age"
-          min={1}
-          max={120}
-          ref={inputAge}
+          placeholder="Digite a cilindrada do seu carro"
+          name="cilindrada"
+          ref={inputCilindrada}
         />
-        <br />
-        <input
-          type="email"
-          placeholder="Digite o seu e-mail"
-          name="email"
-          ref={inputEmail}
-        />
-        <br />
-        <button type="button" onClick={createUsers}>
+        <button type="button" onClick={createCars}>
           Cadastrar
         </button>
       </form>
       <br />
 
-      {users.map((user) => (
-        <div key={user.id} className="card">
+      {cars.map((cars) => (
+        <div key={cars.id} className="card">
           <div>
             <p>
-              Nome: <span>{user.name}</span>
+              Matricula: <span>{cars.matricula}</span>
             </p>
             <p>
-              Idade: <span>{user.age}</span>
+              Marca: <span>{cars.marca}</span>
             </p>
             <p>
-              Email: <span>{user.email}</span>
+              Modelo: <span>{cars.modelo}</span>
+            </p>
+            <p>
+              Cor: <span>{cars.cor}</span>
+            </p>
+            <p>
+              Cilindrada: <span>{cars.cilindrada}</span>
             </p>
           </div>
           <button>
             <img
               src={Trash}
-              onClick={() => deleteUser(user.id)}
+              onClick={() => deleteUser(cars.id)}
               alt="Lixeira"
             />
           </button>
