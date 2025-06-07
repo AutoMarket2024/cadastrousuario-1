@@ -13,7 +13,7 @@ function RoutesComponent() {
   return (
     <Router>
       <div>
-        <h1>Seja bem vindo ao Sistema de Registo funcionarios afectos a A3D</h1>
+        <h1>Seja bem vindo ao Sistema de Gestao de Carros da A3D</h1>
         <br />
         <Routes>
           <Route path="/" element={<SignIn />} />
@@ -21,9 +21,9 @@ function RoutesComponent() {
           <Route 
             path="/home" 
             element={
-              <ProtectedRoute>
+              
                 <Home />
-              </ProtectedRoute>
+              
             } 
           />
           <Route path="*" element={<h1>Página não encontrada</h1>} />
