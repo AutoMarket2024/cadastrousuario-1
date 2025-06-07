@@ -15,6 +15,7 @@ function SignUp() {
   const inputEmail = useRef();
   const inputPassword = useRef();
   const inputRepeatePassword = useRef();
+  const inputTelephone = useRef();
   const inputAddress = useRef();
   //comando para buscar os usuários
   async function getUsers() {
@@ -105,7 +106,19 @@ function SignUp() {
           ref={inputRepeatePassword}
         />
         <br/>
-        
+        <input
+          type="text"
+          placeholder="digite o numero de telefone"
+          name="telephone"
+          ref={inputTelephone}
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="Digite o seu endereço"
+          name="address"
+          ref={inputAddress}
+        />
         <button type="button" onClick={createUsers}>
           Cadastrar
         </button>
