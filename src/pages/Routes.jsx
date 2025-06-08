@@ -1,7 +1,8 @@
 import Home from "./Home";
 import SignIn from "./Login/Login";
 import SignUp from "./Login/SignUp";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ForgetPassword from "./Login/Forget";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 // Protected Route component
 function ProtectedRoute({ children }) {
@@ -17,13 +18,16 @@ function RoutesComponent() {
         <br />
         <Routes>
           <Route path="/" element={<SignIn />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/forgotpassword" element={<ForgetPassword />} />
+          <Route path="/forgot-password" element={<ForgetPassword />} />
           <Route path="/signup" element={<SignUp />} />
           <Route 
             path="/home" 
             element={
-              
+              <ProtectedRoute>
                 <Home />
-              
+              </ProtectedRoute>
             } 
           />
           <Route path="*" element={<h1>Página não encontrada</h1>} />
