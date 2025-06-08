@@ -2,11 +2,16 @@ import Home from "./Home";
 import SignIn from "./Login/Login";
 import SignUp from "./Login/SignUp";
 import ForgetPassword from "./Login/Forget";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 // Protected Route component
 function ProtectedRoute({ children }) {
-  const isAuthenticated = localStorage.getItem('token'); // or your auth logic
+  const isAuthenticated = localStorage.getItem("token"); // or your auth logic
   return isAuthenticated ? children : <Navigate to="/" replace />;
 }
 
@@ -19,17 +24,9 @@ function RoutesComponent() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/login" element={<SignIn />} />
-          <Route path="/forgotpassword" element={<ForgetPassword />} />
           <Route path="/forgot-password" element={<ForgetPassword />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route 
-            path="/home" 
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            } 
-          />
+          <Route path="/home" element={<Home />} />
           <Route path="*" element={<h1>Página não encontrada</h1>} />
         </Routes>
       </div>

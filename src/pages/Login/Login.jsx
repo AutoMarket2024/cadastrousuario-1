@@ -2,12 +2,17 @@ import React from "react";
 import Home from "../Home";
 import "./Login.css";
 import { FaUser, FaLock } from "react-icons/fa";
-import { BrowserRouter as Router, Route, Link, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 function Login() {
-  const [userName, setUserName] = useState(""); 
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [erro, setErro] = useState("");
@@ -16,7 +21,7 @@ function Login() {
     event.preventDefault();
     // Clear previous errors
     setErro("");
-    
+
     //console.log("Usuário:", userName);
     //console.log("Senha:", password);
 
@@ -25,7 +30,7 @@ function Login() {
         userName,
         password,
       });
-      
+
       if (response.data.success) {
         // Armazenar token ou dados do usuário (ex: localStorage)
         localStorage.setItem("token", response.data.token);
@@ -43,28 +48,25 @@ function Login() {
     <div className="container">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <div className="input-group">
-          <FaUser className="icon" />
-          <input 
-            type="email" 
-            name="email" 
-            placeholder="Digite o seu email" 
-            value={userName}
-            onChange={(event) => setUserName(event.target.value)} 
-            required 
-          />
-        </div>
-        <div className="input-group">
-          <FaLock className="icon" />
-          <input 
-            type="password" 
-            name="password" 
-            placeholder="Digite a palavra passe" 
-            value={password}
-            onChange={(event) => setPassword(event.target.value)} 
-            required
-          />
-        </div>
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Digite o seu email"
+          value={userName}
+          onChange={(event) => setUserName(event.target.value)}
+          required
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Digite a palavra passe"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          required
+        />
+
         <button type="submit">
           <Link to={"/home"}>Login</Link>
         </button>
